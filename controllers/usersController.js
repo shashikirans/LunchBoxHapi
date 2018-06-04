@@ -25,16 +25,12 @@ exports.loginUser = (req, res) => {
       password: req.payload.password
     }
     return models.User.findOne({ where: { email: users.email } }).then(user => {
-      if (user == null) {
-        return { message: "User not Found" }
-      } else {
-        if (user.dataValues.password == users.password) {
+        if (user != null && user.validatePassword(req.payload.password)) {
           return res.response({message: "Signin successfully", user}).code(200)
         } else {
           return { message: "Email or Password is invalid" }
         }
         return user.dataValues
-      }
     }).catch((err) => {
       return err.message;
     })

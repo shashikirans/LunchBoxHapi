@@ -2,7 +2,7 @@
 
 const models = require('../models');
 const usersController = require('../controllers/usersController')
-
+const bcrypt = require('bcryptjs');
 
 const usersRoutes = [
   {

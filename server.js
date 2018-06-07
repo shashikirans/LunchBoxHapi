@@ -2,11 +2,19 @@
 
 const Hapi = require('hapi');
 const routes = require('./routes');
+let server;
 
-const server = Hapi.server({
-    port: 3000,
-    host: 'localhost'
-});
+if(process.env.NODE_ENV === 'development') {
+    server = Hapi.server({
+        port: 3001,
+        host: 'localhost'
+    });
+  } else if (process.env.NODE_ENV === 'test'){
+    server = Hapi.server({
+        port: 3002,
+        host: 'localhost'
+    });
+  }
 
 server.route({
     method: 'GET',
@@ -34,7 +42,6 @@ for (var route in routes) {
 }
 
 const init = async () => {
-
     await server.register({
         plugin: require('hapi-pino'),
         options: {
@@ -42,15 +49,14 @@ const init = async () => {
             logEvents: ['response']
         }
     });
-
     await server.start();
     console.log(`Server running at: ${server.info.uri}`);
 };
 
 process.on('unhandledRejection', (err) => {
-
     console.log(err);
     process.exit(1);
 });
 
 init();
+module.exports = server;

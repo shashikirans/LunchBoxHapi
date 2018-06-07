@@ -9,7 +9,7 @@ exports.createUser = (req, h) => {
     password: req.payload.password,
     email: req.payload.email,
     account_status: true,
-    auth_token: 1234
+    // auth_token: 1234
   };
   return models.User.create(userInfo).then((userInfo) => {
     return { message: "User created successfully", user: userInfo };
@@ -48,6 +48,6 @@ exports.getUser = (req, h) => {
   }).then((userData) => {
     return { message: "Success", user: userData };
   }).catch((err) => {
-    return { err: "err" };
+    return { err: err };
   });
 }

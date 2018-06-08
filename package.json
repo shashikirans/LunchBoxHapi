@@ -20,11 +20,14 @@
   "homepage": "https://github.com/shashikirans/LunchBoxHapi#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "faker": "^4.1.0",
     "hapi": "^17.5.1",
     "hapi-auth-jwt2": "^8.1.0",
     "hapi-pino": "^4.0.4",
     "jsonwebtoken": "^8.2.2",
     "mysql2": "^1.5.3",
-    "sequelize": "^4.37.10"
+    "nodemon": "^1.17.5",
+    "sequelize": "^4.37.10",
+    "sequelize-cli": "^4.0.0"
   }
 }

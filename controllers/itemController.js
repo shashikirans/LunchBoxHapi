@@ -19,7 +19,7 @@ exports.createItem = (req, h) => {
 }
 
 exports.getItem = (req, h) => {
-    console.log(req.headers.authorization)
+  console.log(req.headers.authorization)
   return models.Item.findAll({
     // where: {
     //   id: req.params.id
@@ -30,4 +30,64 @@ exports.getItem = (req, h) => {
   .catch((err) => {
     return { err: "err" };
   });
+}
+
+exports.deleteItem = (req, h) => {
+  console.log(req.headers.authorization)
+  return models.Item.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then((itemInfo) => {
+    return { message: "Success", Item: itemInfo };
+  })
+  .catch((err) => {
+    return { err: "err" };
+  });
+}
+
+exports.showItem = (req, h) => {
+  console.log(req.headers.authorization)
+  return models.Item.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then((itemInfo) => {
+    console.log(itemInfo)
+    if(itemInfo) {
+      return h.response(itemInfo).code(200);  
+    }
+    else {
+      return { message: "Item not found", Item: itemInfo }
+    }
+  })
+  .catch((err) => {
+    return { err: err };
+  });
+}
+
+exports.updateItem = (req, h) => {
+ return  models.Item.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then((itemInfo) => {
+    if(!itemInfo){
+      return { message: "Item not found"}
+    }
+    console.log(req.payload)
+    const params = {
+      name: req.payload.name,
+      price: req.payload.price,
+      quantity: req.payload.quantity,
+      category: req.payload.category
+    }
+    return itemInfo.updateAttributes(params).then((itemInfo) => {
+      return { message: "Item updated Successfully", Item: itemInfo};
+    })
+  })
+  .catch((err) => {
+    return { err: err}
+  })
 }

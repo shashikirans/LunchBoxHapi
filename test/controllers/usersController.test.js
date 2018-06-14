@@ -49,9 +49,5 @@ lab.test("Creating valid user", async () => {
     let result = response.result;
     let payload = options.payload;
 
-    console.log(result);
-
     Code.expect(response.statusCode).to.equal(200);
-    // Code.expect(result["user"]).to.be.instanceof(Array);
-    // Code.expect(result["user"]).to.have.length(0);
 });

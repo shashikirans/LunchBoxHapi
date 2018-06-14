@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && lab test/",
-    "start": "nodemon server.js",
+    "test": "export NODE_ENV=test || set NODE_ENV=test&& lab test/",
+    "start": "export NODE_ENV=development || set NODE_ENV=development && nodemon server.js",
     "test-watch": "nodemon --exec 'npm test'"
   },
   "repository": {
@@ -19,8 +19,11 @@
   },
   "homepage": "https://github.com/shashikirans/LunchBoxHapi#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "hapi": "^17.5.1",
+    "hapi-auth-jwt2": "^8.1.0",
     "hapi-pino": "^4.0.4",
+    "jsonwebtoken": "^8.2.2",
     "mysql2": "^1.5.3",
     "sequelize": "^4.37.10"
   },

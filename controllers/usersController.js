@@ -1,5 +1,6 @@
 'use strict';
 const models = require('../models');
+const JWT = require('jsonwebtoken');
 
 exports.createUser = (req, h) => {
   const userInfo = {
@@ -25,22 +26,21 @@ exports.loginUser = (req, res) => {
       password: req.payload.password
     }
     return models.User.findOne({ where: { email: users.email } }).then(user => {
-      if (user == null) {
-        return { message: "User not Found" }
-      } else {
-        if (user.dataValues.password == users.password) {
-          return res.response({message: "Signin successfully", user}).code(200)
+        if (user != null && user.validatePassword(req.payload.password)) {
+            console.log(user.dataValues)
+         const token = JWT.sign(user.dataValues, "23094820394823948dsafbhasdfhasdbf");
+          return res.response({message: "Signin successfully", token: token, user}).code(200)
         } else {
           return { message: "Email or Password is invalid" }
         }
         return user.dataValues
-      }
     }).catch((err) => {
       return err.message;
     })
   }
 
 exports.getUser = (req, h) => {
+    console.log(req.headers.authorization)
   return models.User.findAll({
     // where: {
     //   id: req.params.id

@@ -16,6 +16,7 @@ const swaggerOptions = {
             title: 'Test API Documentation',
             version: '0.0.1',
         },
+        'documentationPath': '/'
     };
 
 server.register([
@@ -39,7 +40,7 @@ const validate = async function (decoded, request) {
 
 server.route({
     method: 'GET',
-    path: '/',
+    path: '/hello_world',
     config : {
         tags: ['api'],
         auth: false

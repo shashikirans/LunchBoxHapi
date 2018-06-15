@@ -1,12 +1,31 @@
 'use strict';
 
 const Hapi = require('hapi');
+const Inert = require('inert');
+const Vision = require('vision');
+const HapiSwagger = require('hapi-swagger');
 const routes = require('./routes');
 
-const server = Hapi.server({
+ const server = Hapi.server({
     port: 3000,
     host: 'localhost'
 });
+
+const swaggerOptions = {
+    info: {
+            title: 'Test API Documentation',
+            version: '0.0.1',
+        },
+    };
+
+server.register([
+    Inert,
+    Vision,
+    {
+        plugin: HapiSwagger,
+        options: swaggerOptions
+    }
+]);
 
 const validate = async function (decoded, request) {
     // do your checks to see if the person is valid
@@ -21,9 +40,13 @@ const validate = async function (decoded, request) {
 server.route({
     method: 'GET',
     path: '/',
+    config : {
+        tags: ['api'],
+        auth: false
+    },
     handler: (request, h) => {
-
-        return 'Hello, world!';
+        return({message: 'Hello, world!'})
+        // return 'Hello, world!';
     }
 });
 

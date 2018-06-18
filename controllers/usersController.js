@@ -12,11 +12,14 @@ exports.createUser = (req, h) => {
     account_status: true,
     auth_token: 1234
   };
-  return models.User.create(userInfo).then((userInfo) => {
-    return { message: "User created successfully", user: userInfo };
-  }).catch((err) => {
-    return { err: err };
-  });
+
+  
+
+  // return models.User.create(userInfo).then((userInfo) => {
+  //   return { message: "User created successfully", user: userInfo };
+  // }).catch((err) => {
+  //   return { err: err };
+  // });
 }
 
 exports.loginUser = (req, res) => {

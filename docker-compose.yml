@@ -1,0 +1,15 @@
+version: '2'
+services:
+  lunchbox-service:
+    build: .
+    ports:
+     - "8123:8123"
+    links:
+     - db
+    environment:
+     - DATABASE_HOST=db
+  db:
+    build: ./database
+
+
+    

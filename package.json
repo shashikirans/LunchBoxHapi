@@ -4,8 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "prod": "export NODE_ENV=production || SET \"NODE_ENV=production\" && npm run migrate && nodemon server.js",
     "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha test/test.js",
     "start": "nodemon server.js",
+    "create": "sequelize db:create",
+    "migrate": "sequelize db:migrate",
     "test-watch": "nodemon --exec 'npm test'"
   },
   "repository": {

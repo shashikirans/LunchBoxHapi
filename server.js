@@ -7,8 +7,8 @@ const HapiSwagger = require('hapi-swagger');
 const routes = require('./routes');
 
  const server = Hapi.server({
-    port: 3000,
-    host: 'localhost'
+    port: 8123,
+    host: '0.0.0.0'
 });
 
 const swaggerOptions = {

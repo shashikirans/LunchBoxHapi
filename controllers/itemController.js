@@ -1,5 +1,4 @@
 'use strict';
-const models = require('../models');
 const JWT = require('jsonwebtoken');
 
 exports.createItem = (req, h) => {

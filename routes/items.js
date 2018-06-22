@@ -21,7 +21,7 @@ const itemRoutes = [
                     name: Joi.string().required(),
                     price: Joi.number().min(1),
                     quantity: Joi.number().min(1),
-                    category: Joi.number().min(1),
+                    category: Joi.string().min(1),
                     source: Joi.string().required()
                   } ,
                   failAction: async(request, h, err) => {
@@ -56,7 +56,12 @@ const itemRoutes = [
   {
     method: "DELETE",
     path: "/api/items/{id}",  
-    config: { auth: 'jwt' },
+    config: { auth: 'jwt',cors: corsHeader,tags: ['api'],
+    validate: {
+    headers: Joi.object({
+      'authorization': Joi.string().required()
+    }).unknown() }
+  },
     handler: itemController.deleteItem
   },
   {

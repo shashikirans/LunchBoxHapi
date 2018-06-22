@@ -6,7 +6,6 @@ exports.createUser = (req, h) => {
   const userInfo = {
     first_name: req.payload.first_name,
     last_name: req.payload.last_name,
-    contact_number: req.payload.contact_number,
     password: req.payload.password,
     email: req.payload.email,
     account_status: true,

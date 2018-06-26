@@ -11,7 +11,7 @@ exports.createItem = (req, h) => {
     source: "Mysuru hotel"
   };
   return models.Item.create(itemInfo).then((itemInfo) => {
-    return { message: "Item created successfully", user: itemInfo };
+    return { message: "Item created successfully", item: itemInfo };
   }).catch((err) => {
     return { err: err };
   });
@@ -23,8 +23,8 @@ exports.getItem = (req, h) => {
     // where: {
     //   id: req.params.id
     // }
-  }).then((userData) => {
-    return { message: "Success", user: userData };
+  }).then((itemData) => {
+    return { message: "Success", item: itemData };
   })
   .catch((err) => {
     return { err: "err" };

@@ -66,8 +66,8 @@ const itemRoutes = [
           'authorization': Joi.string().required()
         }).unknown()
       },
-      handler: (request, h) => {
-        axiosObj.get(`${api_dbal.PATH}/api/items`)
+      handler: async (request, h) => {
+        return axiosObj.get(`${api_dbal.PATH}/api/items`)
         .then(function (response){
           return h.response(response.data);
         })
@@ -75,6 +75,60 @@ const itemRoutes = [
           return h.response(error);
         });
       }
+    }
+  },
+  {
+    method: "PUT",
+    path: "/api/items/{id}",
+    config: { 
+      auth: 'jwt',
+      cors: api_dbal.corsHeader,
+      tags: ['api'],
+      validate: {
+        headers: Joi.object({
+          'authorization': Joi.string().required()
+        }).unknown()
+      },
+      handler: (request, h) => {
+        const params = {
+          name: request.payload.name,
+          price: request.payload.price,
+          quantity: request.payload.quantity,
+          category: request.payload.category
+        }
+        axiosObj.put(`${api_dbal.PATH}/api/items/{id}`, params)
+        .then(function (response){
+          return h.response(response.data);
+        })
+        .catch(function(error){
+          return h.response(error);
+        });
+      }
+    }
+  },
+  {
+    method: "DELETE",
+    path: "/api/items/{id}",  
+    config: {
+      auth: 'jwt',
+      cors: api_dbal.corsHeader,
+      tags: ['api'],
+      validate: {
+        headers: Joi.object({
+          'authorization': Joi.string().required()
+        }).unknown()
+      }
+    },
+    handler: (request, h) => {
+      const id = request.params.id;
+      console.log(request.params.id);
+      return axiosObj.delete(`${api_dbal.PATH}/api/items/${id}`)
+      .then(function(response){
+        return h.response(response.data)
+      })
+      .catch(function(error){
+        return h.response(error);
+      });
     }
   }
 ];

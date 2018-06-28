@@ -1,4 +1,4 @@
-const PATH = 'http://192.168.2.67:3005';
+const PATH = 'http://0.0.0.0:3005';
 
 const corsHeader = {
     origin: ['*'],

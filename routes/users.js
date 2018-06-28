@@ -1,6 +1,5 @@
 'use strict';
 
-const usersController = require('../controllers/usersController')
 const bcrypt = require('bcryptjs');
 const Joi = require('joi');
 var axiosObj = require('axios');
@@ -57,16 +56,6 @@ const usersRoutes = [
       }
     },
     path: "/api/users/create",
-  },
-  {
-    method: "GET",
-    path: "/api/users",
-    config: { auth: 'jwt',tags: ['api'],
-    validate: {
-      headers: Joi.object({
-        'authorization': Joi.string().required()
-      }).unknown() } },
-    handler: usersController.getUser
   },
   {
     method: "POST",
